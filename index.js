@@ -85,6 +85,24 @@ app.put('/updateUser/:id', (request, response) => {
         });
     }
 })
+
+app.patch('/updateUser/id/:id', (request, response) => {
+    const userId = Number(request.params.id);
+    const userIndex = users.findIndex(u => u.id === userId);
+    if (userIndex === -1) {
+        response.status(404).json({
+            message: "user not found"
+        });
+    }
+    else {
+        const userData = request.body;
+        users[userIndex] = { ...users[userIndex], ...userData };
+        response.json({
+            message: "data updated successfully",
+            id: userId
+        });
+    }
+})
 app.listen(4000, () => {
     console.log("Server is running...");
 });
