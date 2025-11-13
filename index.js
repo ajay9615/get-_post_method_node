@@ -53,6 +53,23 @@ app.post('/newUser', (request, response) => {
         newUser: newUser
     });
 });
+app.delete('/deletUser/id/:id', (request, response) => {
+    const userId = Number(request.params.id);
+    const userIndex = users.findIndex(u => u.id === userId);
+    console.log("index: " + userIndex);
+    if (userIndex === -1) {
+        response.status(404).json({ message: "User Not Found" });
+    }
+    else {
+        const deleteU = users.splice(userIndex, 1);
+        response.status(200).json({
+            message: "user deleted successfully",
+            id: userId
+        });
+    }
+})
+
+
 app.listen(4000, () => {
     console.log("Server is running...");
 });
