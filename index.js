@@ -103,6 +103,6 @@ app.patch('/updateUser/id/:id', (request, response) => {
         });
     }
 })
-app.listen(4000, () => {
+app.listen(80, () => {
     console.log("Server is running...");
 });
